@@ -1,18 +1,22 @@
 package com.example.demo.service;
 
 import com.example.demo.models.User;
+import com.example.demo.service.interfaces.CourseInfoServiceInt;
+import com.example.demo.service.interfaces.CustomerInfoServiceInt;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 @Service
-public class CustomerInfoService {
+public class CustomerInfoService implements CustomerInfoServiceInt {
     @Autowired
     RestTemplate restTemplate;
 
+    @Transactional
     public User userById(Long id){
         String apiCredentials = "admin:admin";
         String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
