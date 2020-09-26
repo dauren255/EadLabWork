@@ -1,14 +1,14 @@
 package com.example.courseinfo.service;
-import com.example.demo.models.Course;
+import com.example.courseinfo.models.Course;
 import com.example.courseinfo.repo.CourseRepository;
+import com.example.courseinfo.service.interfaces.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
 
 @Service
-public class CourseService {
+public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseRepository courseRepository;
