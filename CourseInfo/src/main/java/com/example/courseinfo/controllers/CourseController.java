@@ -1,28 +1,29 @@
 package com.example.courseinfo.controllers;
 
-import com.example.courseinfo.service.CourseService;
+import com.example.courseinfo.models.Course;
+import com.example.courseinfo.service.CourseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CourseController {
     @Autowired
-    private CourseService courseService;
+    private CourseServiceImpl courseServiceImpl;
     @GetMapping("/courses")
-    public Iterable<com.example.demo.models.Course> allCourses() {
-        Iterable<com.example.demo.models.Course> courses;
-        courses = courseService.findAll();
+    public Iterable<Course> allCourses() {
+        Iterable<Course> courses;
+        courses = courseServiceImpl.findAll();
         return courses;
     }
     @GetMapping("/course/{id}")
-    public com.example.demo.models.Course getCourseById(@PathVariable Long id) {
-        com.example.demo.models.Course course;
-        course = courseService.findById(id);
+    public Course getCourseById(@PathVariable Long id) {
+        Course course;
+        course = courseServiceImpl.findById(id);
         return course;
     }
 
     @PostMapping("/addCourse")
-    public void addBlog(@RequestBody com.example.demo.models.Course course) {
-        courseService.save(course);
+    public void addBlog(@RequestBody Course course) {
+        courseServiceImpl.save(course);
     }
 }
