@@ -17,9 +17,10 @@ public class RatingImplService implements RatingService {
     public Iterable<Rating> findAll() {
         return ratingRepository.findAll();
     }
+
     @Transactional
-    public Rating findByBookId(Long id) {
-        return ratingRepository.findByBookid(id);
+    public Rating findByCourseId(Long id) {
+        return ratingRepository.findAllByCourseId(id);
     }
 
     @Transactional
@@ -29,6 +30,6 @@ public class RatingImplService implements RatingService {
 
     @Transactional
     public void deleteById(Long id) {
-        ratingRepository.delete(ratingRepository.findByBookid(id));
+        ratingRepository.delete(ratingRepository.findAllByCourseId(id));
     }
 }

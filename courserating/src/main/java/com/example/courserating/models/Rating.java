@@ -20,11 +20,11 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long bookid;
+    private Long courseId;
     private int rating;
 
-    public Rating(Long bookid, int rating) {
-        this.bookid = bookid;
+    public Rating(Long courseId, int rating) {
+        this.courseId = courseId;
         this.rating = rating;
     }
 }

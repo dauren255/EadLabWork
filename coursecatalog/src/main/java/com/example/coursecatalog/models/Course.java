@@ -11,9 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Course {
     private Long id;
-
     private String title;
-
     private String author;
 
     public Course(String title, String author) {

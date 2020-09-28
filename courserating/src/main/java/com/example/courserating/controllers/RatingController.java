@@ -16,10 +16,10 @@ public class RatingController {
         ratings = ratingService.findAll();
         return ratings;
     }
-    @GetMapping("/rating/{bookid}")
-    public Rating getCourseById(@PathVariable Long bookid) {
+    @GetMapping("/rating/{courseId}")
+    public Rating getCourseById(@PathVariable Long courseId) {
         Rating rating;
-        rating = ratingService.findByBookId(bookid);
+        rating = ratingService.findByCourseId(courseId);
         return rating;
     }
 

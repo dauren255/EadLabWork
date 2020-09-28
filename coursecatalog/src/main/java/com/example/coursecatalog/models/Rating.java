@@ -1,5 +1,6 @@
 package com.example.coursecatalog.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,13 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CourseRating {
-
-    private Long bookid;
+@AllArgsConstructor
+public class Rating {
+    private Long id;
+    private Long courseId;
     private int rating;
 
-    public CourseRating(Long bookid, int rating) {
-        this.bookid = bookid;
-        this.rating = rating;
-    }
 }

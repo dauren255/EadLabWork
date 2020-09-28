@@ -1,9 +1,9 @@
 package com.example.coursecatalog.service.interfaces;
 
-import com.example.coursecatalog.models.CourseRating;
+import com.example.coursecatalog.models.Rating;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface CourseRatingServiceInt {
-    CourseRating courseRatingByBookId(Long id);
+    Rating courseRatingByCourseId(Long id);
 }

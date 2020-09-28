@@ -13,7 +13,7 @@ public class CustomerController {
     CustomerInfoService customerInfoService;
 
     @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return customerInfoService.userById(id);
+    public String getUserById(@PathVariable Long id) {
+        return customerInfoService.userById(id).toString();
     }
 }

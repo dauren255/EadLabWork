@@ -1,6 +1,6 @@
 package com.example.coursecatalog.service;
 
-import com.example.coursecatalog.models.CourseRating;
+import com.example.coursecatalog.models.Rating;
 import com.example.coursecatalog.service.interfaces.CourseRatingServiceInt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +13,13 @@ public class CourseRatingService implements CourseRatingServiceInt {
     RestTemplate restTemplate;
 
     @Transactional
-    public CourseRating courseRatingByBookId(Long id){
+    public Rating courseRatingByCourseId(Long id){
         return restTemplate.getForObject(
-                "http://localhost:8082/rating/" + id, CourseRating.class);
+                "http://localhost:8082/rating/" + id, Rating.class);
     }
 
     @Transactional
-    public CourseRating courseRatingByBookIdFallback(Long bookId) {
-        return new CourseRating(bookId, 0);
+    public Rating courseRatingByCourseIdFallback(Long courseid) {
+        return new Rating((long) 0, courseid, 0);
     }
 }
