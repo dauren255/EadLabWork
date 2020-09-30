@@ -16,7 +16,7 @@ public class CourseInfoService implements CourseInfoServiceInt {
     @Transactional
     public Course courseById(Long id) {
         return restTemplate.getForObject(
-                "http://localhost:8083/course/" + id, Course.class);
+                "http://course-info-service/course/" + id, Course.class);
     }
 
 }

@@ -15,7 +15,7 @@ public class CourseRatingService implements CourseRatingServiceInt {
     @Transactional
     public Rating courseRatingByCourseId(Long id){
         return restTemplate.getForObject(
-                "http://localhost:8082/rating/" + id, Rating.class);
+                "http://course-rating-service/rating/" + id, Rating.class);
     }
 
     @Transactional

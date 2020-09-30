@@ -28,7 +28,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
 //        return restTemplate.getForObject(
 //                "http://book-info-service/book/info/" + userId,
 //                UserBook.class);
-        return restTemplate.exchange("http://localhost:8081/user/" + id,
+        return restTemplate.exchange("http://customer-info-service/user/" + id,
                 HttpMethod.GET, entity, User.class).getBody();
 //        return restTemplate.getForObject(
 //                "http://localhost:8082/rating/" + id, CourseRating.class);
