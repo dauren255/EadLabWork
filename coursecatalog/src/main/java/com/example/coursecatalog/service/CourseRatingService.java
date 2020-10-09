@@ -1,8 +1,10 @@
 package com.example.coursecatalog.service;
 
+import com.example.coursecatalog.models.Course;
 import com.example.coursecatalog.models.Rating;
 import com.example.coursecatalog.service.interfaces.CourseRatingServiceInt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +18,11 @@ public class CourseRatingService implements CourseRatingServiceInt {
     public Rating courseRatingByCourseId(Long id){
         return restTemplate.getForObject(
                 "http://course-rating-service/rating/" + id, Rating.class);
+    }
+
+    @Transactional
+    public void addRating(Rating rating) {
+        restTemplate.put("http://course-rating-service/addRating", rating);
     }
 
     @Transactional

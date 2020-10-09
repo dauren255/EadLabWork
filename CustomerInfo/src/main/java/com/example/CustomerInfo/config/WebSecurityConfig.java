@@ -1,5 +1,6 @@
 package com.example.CustomerInfo.config;
 
+import com.example.CustomerInfo.models.Role;
 import com.example.CustomerInfo.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/v2/api-docs").permitAll()
-                .antMatchers("/", "/addUser").permitAll()
+                .antMatchers("/users", "/addUser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -41,20 +42,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
-                .permitAll()
-                .and()
-                .addFilter(new JwtTokenGeneratorFilter(authenticationManager()))
-                .addFilterAfter(new JwtTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-        ;
+                .permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService)
-                .passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-    }
+
 }

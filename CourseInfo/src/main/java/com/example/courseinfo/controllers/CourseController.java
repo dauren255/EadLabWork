@@ -15,6 +15,12 @@ public class CourseController {
         courses = courseServiceImpl.findAll();
         return courses;
     }
+    @GetMapping("/courses/{title}")
+    public Iterable<Course> allCoursesByTitle(@PathVariable String title) {
+        Iterable<Course> courses;
+        courses = courseServiceImpl.findAllByTitleContainingIgnoreCase(title);
+        return courses;
+    }
     @GetMapping("/course/{id}")
     public Course getCourseById(@PathVariable Long id) {
         Course course;

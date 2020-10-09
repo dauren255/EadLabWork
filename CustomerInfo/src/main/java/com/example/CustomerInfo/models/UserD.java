@@ -1,17 +1,15 @@
-package com.example.coursecatalog.models;
+package com.example.CustomerInfo.models;
 
 import lombok.*;
 
 @Data
-@Getter
 @Setter
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class User {
-
+@NoArgsConstructor
+public class UserD {
     private Long id;
 
     private String username;
     private String password;
-
 }

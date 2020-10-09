@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+    <span th:insert="blocks/bootstrap"></span>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container mt-5">
+    <div class="text-right pb-10">
+        <a class="btn btn-primary float-right" th:href="addCourse">Добавить курс</a>
+    </div>
+    <form align="center" method="get" action="/home">
+        <div class="input-group mb-3">
+            <input type="text" name="filter" th:value="${filter}" class="form-control" placeholder="Найти курс">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="submit">Найти</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table mt-5 mb-5">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Название</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Рейтинг</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td><h6 th:text="${course.id}"/></td>
+            <td><h6 th:text="${course.title}"/></td>
+            <td><h6 th:text="${course.author}"/></td>
+            <td><h6 th:text="${course.rating}"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>

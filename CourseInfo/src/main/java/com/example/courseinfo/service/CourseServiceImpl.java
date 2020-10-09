@@ -14,16 +14,16 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository courseRepository;
 
     @Transactional
+    public Iterable<Course> findAllByTitleContainingIgnoreCase(String filter) {
+        return courseRepository.findAllByTitleContainingIgnoreCase(filter);
+    }
+    @Transactional
     public Iterable<Course> findAll() {
         return courseRepository.findAll();
     }
     @Transactional
     public Course findById(Long id) {
         return courseRepository.findById(id).get();
-    }
-    @Transactional
-    public Iterable<Course> findByTitle(String title) {
-        return courseRepository.findAllByTitle(title);
     }
     @Transactional
     public void save(Course course) {

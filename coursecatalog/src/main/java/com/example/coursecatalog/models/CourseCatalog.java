@@ -7,13 +7,9 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
+public class CourseCatalog {
     private Long id;
     private String title;
     private String author;
-
-    public Course(String title, String author) {
-        this.title = title;
-        this.author = author;
-    }
+    private int rating;
 }

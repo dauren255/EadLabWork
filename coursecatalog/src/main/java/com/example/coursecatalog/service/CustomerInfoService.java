@@ -2,35 +2,39 @@ package com.example.coursecatalog.service;
 
 import com.example.coursecatalog.models.User;
 import com.example.coursecatalog.service.interfaces.CustomerInfoServiceInt;
-import org.apache.commons.codec.binary.Base64;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.Charset;
+
 @Service
 public class CustomerInfoService implements CustomerInfoServiceInt {
     @Autowired
     RestTemplate restTemplate;
 
-    @Transactional
-    public User userById(Long id){
-        String apiCredentials = "admin:admin";
-        String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic " + base64Credentials);
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-
-//        return restTemplate.getForObject(
-//                "http://book-info-service/book/info/" + userId,
-//                UserBook.class);
-        return restTemplate.exchange("http://customer-info-service/user/" + id,
-                HttpMethod.GET, entity, User.class).getBody();
-//        return restTemplate.getForObject(
-//                "http://localhost:8082/rating/" + id, CourseRating.class);
+    HttpHeaders createHeaders(String username, String password){
+        return new HttpHeaders() {{
+            String auth = username + ":" + password;
+            byte[] encodedAuth = Base64.encodeBase64(
+                    auth.getBytes(Charset.forName("UTF-8")) );
+            String authHeader = "Basic " + new String( encodedAuth );
+            set( "Authorization", authHeader );
+        }};
     }
+
+    @Transactional
+    public User getUserById(Long id) {
+        return restTemplate.getForObject
+                ("http://customer-info-service/userString/" + id,
+                        User.class);
+    }
+
+
 }

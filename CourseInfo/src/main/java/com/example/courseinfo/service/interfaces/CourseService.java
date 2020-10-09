@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 @Service
 public interface CourseService {
     Iterable<Course> findAll();
+    Iterable<Course> findAllByTitleContainingIgnoreCase(String filter);
     Course findById(Long id);
-    Iterable<Course> findByTitle(String title);
     void save(Course course);
     void deleteById(Long id);
 }

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface CustomerInfoServiceInt {
-    User userById(Long id);
+    User getUserById(Long id);
 }

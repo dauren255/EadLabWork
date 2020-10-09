@@ -2,6 +2,7 @@ package com.example.CustomerInfo.service;
 
 import com.example.CustomerInfo.models.Role;
 import com.example.CustomerInfo.models.User;
+import com.example.CustomerInfo.models.UserD;
 import com.example.CustomerInfo.repo.UserRepository;
 import com.example.CustomerInfo.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Transactional
     public User findById(Long id) {
         return userRepository.findById(id).get();
+    }
+    @Transactional
+    public UserD findByIdD(Long id) {
+        User user = userRepository.findById(id).get();
+        UserD userD = new UserD();
+        userD.setId(user.getId());
+        userD.setUsername(user.getUsername());
+        userD.setPassword(user.getPassword());
+        return userD;
     }
     @Transactional
     public User findById(String username) {

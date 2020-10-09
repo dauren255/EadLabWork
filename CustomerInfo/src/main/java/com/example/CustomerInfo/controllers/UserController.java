@@ -1,6 +1,7 @@
 package com.example.CustomerInfo.controllers;
 
 import com.example.CustomerInfo.models.User;
+import com.example.CustomerInfo.models.UserD;
 import com.example.CustomerInfo.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,12 @@ public class UserController {
         User user;
         user = userService.findById(id);
         return user;
+    }
+    @GetMapping("/userString/{id}")
+    public UserD getUserByIdToString(@PathVariable Long id) {
+        UserD userD;
+        userD = userService.findByIdD(id);
+        return userD;
     }
 
     @PostMapping("/addUser")
