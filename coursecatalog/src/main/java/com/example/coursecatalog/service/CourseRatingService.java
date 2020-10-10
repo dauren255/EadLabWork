@@ -22,11 +22,12 @@ public class CourseRatingService implements CourseRatingServiceInt {
 
     @Transactional
     public void addRating(Rating rating) {
-        restTemplate.put("http://course-rating-service/addRating", rating);
+        restTemplate.postForObject("http://course-rating-service/addRating", rating, Rating.class);
+//        restTemplate.put("http://course-rating-service/addRating", rating);
     }
 
     @Transactional
-    public Rating courseRatingByCourseIdFallback(Long courseid) {
-        return new Rating((long) 0, courseid, 0);
+    public Rating courseRatingByCourseIdFallback(Long id) {
+        return new Rating((long) 0, id, 0);
     }
 }

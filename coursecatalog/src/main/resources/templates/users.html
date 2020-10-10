@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Курсы</title>
+    <title>Пользователи</title>
     <span th:insert="blocks/bootstrap"></span>
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
 <div class="container mt-5">
     <div class="text-right pb-5">
-        <a class="btn btn-primary float-right" th:href="addCourse">Добавить курс</a>
+        <a class="btn btn-primary float-right" th:href="addCourse">Регистрация</a>
     </div>
     <form align="center" method="get" action="/home">
         <div class="input-group mb-3">
@@ -24,17 +24,15 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Название</th>
-            <th scope="col">Автор</th>
-            <th scope="col">Рейтинг</th>
+            <th scope="col">Логин</th>
+            <th scope="col">Пароль</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="course : ${courses}">
-            <td><h6 th:text="${course.id}"/></td>
-            <td><h6 th:text="${course.title}"/></td>
-            <td><h6 th:text="${course.author}"/></td>
-            <td><h6 th:text="${course.rating}"/></td>
+        <tr th:each="user : ${users}">
+            <td><h6 th:text="${user.id}"/></td>
+            <td><h6 th:text="${user.username}"/></td>
+            <td><h6 th:text="${user.password}"/></td>
         </tr>
         </tbody>
     </table>

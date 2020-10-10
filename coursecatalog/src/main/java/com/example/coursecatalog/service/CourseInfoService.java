@@ -27,7 +27,8 @@ public class CourseInfoService implements CourseInfoServiceInt {
 
     @Transactional
     public void addCourse(Course course) {
-        restTemplate.put("http://course-info-service/addCourse", course);
+        restTemplate.postForObject("http://course-info-service/addCourse", course, Course.class);
+//        restTemplate.put();
     }
 
     @Transactional
@@ -42,5 +43,19 @@ public class CourseInfoService implements CourseInfoServiceInt {
         Course[] courses = restTemplate.getForObject(
                 "http://course-info-service/courses/" + title, Course[].class);
         return Arrays.asList(courses);
+    }
+    @Transactional
+    public List<Course> allCourseFallback() {
+        Course course = new Course();
+        List<Course> list = new ArrayList<>();
+        list.add(new Course(-1L, "Not available", "Not available"));
+        return list;
+    }
+    @Transactional
+    public List<Course> allCourseByTitleFallback(String title) {
+        Course course = new Course();
+        List<Course> list = new ArrayList<>();
+        list.add(new Course(-1L, "Not available", "Not available"));
+        return list;
     }
 }
