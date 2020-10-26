@@ -10,9 +10,15 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
     @GetMapping("/users")
-    public Iterable<User> allCourses() {
+    public Iterable<User> allUsers() {
         Iterable<User> users;
         users = userService.findAll();
+        return users;
+    }
+    @GetMapping("/usersByUsername/{username}")
+    public Iterable<User> getAllUserByUsername(@PathVariable String username) {
+        Iterable<User> users;
+        users = userService.findAllByUsername(username);
         return users;
     }
     @GetMapping("/user/{id}")
@@ -27,6 +33,7 @@ public class UserController {
         user = userService.findByUsername(username);
         return user;
     }
+
     @PostMapping("/addUser")
     public void addBlog(@RequestBody User user) {
         userService.save(user);

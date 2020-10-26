@@ -9,9 +9,9 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container mt-5 mb-5">
     <form th:action="@{/addCourse}" method="post">
-        <input type="text" name="title" placeholder="Название" class="form-control"><br>
-        <input type="text" name="author" placeholder="Автор" class="form-control"><br>
-        <input type="text" name="rating" placeholder="Рейтинг" class="form-control"><br>
+        <input type="text" name="title" placeholder="Название" class="form-control" required><br>
+        <input type="text" name="author" placeholder="Автор" class="form-control" required><br>
+        <input type="text" name="rating" placeholder="Рейтинг" class="form-control" required><br>
         <button class="btn btn-lg btn-outline-success btn-block" type="submit">Добавить Курс</button>
     </form>
 </div>

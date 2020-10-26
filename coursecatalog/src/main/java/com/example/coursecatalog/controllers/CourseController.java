@@ -38,23 +38,21 @@ public class CourseController {
             courseCatalog.setTitle(course.getTitle());
             courseCatalog.setAuthor(course.getAuthor());
             Rating rating = courseRatingService.courseRatingByCourseId(course.getId());
-            if(rating != null) {
-                courseCatalog.setRating(rating.getRating());
-            } else {
-                courseCatalog.setRating(-1);
-            }
+            courseCatalog.setRating(rating.getRating());
             courseCatalogs.add(courseCatalog);
         }
         model.addAttribute("courses", courseCatalogs);
         model.addAttribute("filter", filter);
         return "home";
     }
+
     @GetMapping("/addCourse")
     public String addBlog() {
         return "addCourse";
     }
+
     @PostMapping("/addCourse")
-    public String addBlog(@Valid CourseCatalog courseCatalog, Model model) throws InterruptedException {
+    public String addBlog(@Valid CourseCatalog courseCatalog) throws InterruptedException {
         Course course = new Course();
         course.setTitle(courseCatalog.getTitle());
         course.setAuthor(courseCatalog.getAuthor());

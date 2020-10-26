@@ -22,9 +22,9 @@ public class CustomerController {
 
     @GetMapping("/users")
     public String getAllUsers(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         if (filter != null && !filter.isEmpty()) {
-            users = customerInfoService.allUsersByUsername(filter);
+            users = customerInfoService.getAllUsersByUsername(filter);
         } else {
             users = customerInfoService.getAllUsers();
         }
@@ -39,16 +39,14 @@ public class CustomerController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("text", "");
         return "login";
     }
     @PostMapping("/login")
-    public String loginPost(@RequestParam String username, @RequestParam String password ) {
-        User user = customerInfoService.getUserByUsername(username);
-        if(user!=null && user.getPassword()==password){
-            return "users";
-        } else {
-            return "login";
-        }
+    public String loginPost(@RequestParam String username, @RequestParam String password , Model model) {
+
+        model.addAttribute("text", customerInfoService.login(username, password));
+        return "login";
     }
 }

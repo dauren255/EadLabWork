@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 
@@ -21,6 +22,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Transactional
     public Iterable<User> findAll() {
         return userRepository.findAll();
+    }
+    @Transactional
+    public Iterable<User> findAllByUsername(String username) {
+        return userRepository.findAllByUsernameContainingIgnoreCase(username);
     }
     @Transactional
     public User findById(Long id) {

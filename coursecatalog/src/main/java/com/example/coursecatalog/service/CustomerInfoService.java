@@ -2,6 +2,7 @@ package com.example.coursecatalog.service;
 
 import com.example.coursecatalog.models.User;
 import com.example.coursecatalog.service.interfaces.CustomerInfoServiceInt;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,47 +20,96 @@ import java.util.List;
 public class CustomerInfoService implements CustomerInfoServiceInt {
     @Autowired
     RestTemplate restTemplate;
+    String apiCredentials = "rest-client:p@ssword";
+    String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
+
     @Transactional
+    @HystrixCommand(fallbackMethod = "getUserByIdFallback",
+            threadPoolKey = "getUserById")
     public User getUserById(Long id) {
-//        return restTemplate.getForObject
-//                ("http://customer-info-service/user/" + id,
-//                        User.class);
-        String apiCredentials = "admin:admin";
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Credentials);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        return restTemplate.exchange("http://customer-info-service/user/" + id,
+                HttpMethod.GET, entity, User.class).getBody();
+    }
+    @Transactional
+    public User getUserByIdFallback(Long id) {
+        User user = new User(-1L, "Not available", "Not available");
+        return user;
+    }
+
+    @Transactional
+    @HystrixCommand(fallbackMethod = "getAllUsersFallback",
+            threadPoolKey = "getAllUsers")
+    public List<User> getAllUsers() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Credentials);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        User [] users = restTemplate.exchange("http://customer-info-service/users",
+                HttpMethod.GET, entity, User[].class).getBody();
+        return Arrays.asList(users);
+    }
+    @Transactional
+    public List<User> getAllUsersFallback() {
+        ArrayList<User> users = new ArrayList<User>();
+        users.add(new User(-1L, "Not available", "Not available"));
+        return users;
+    }
+
+    @Transactional
+    @HystrixCommand(fallbackMethod = "getAllUsersByUsernameFallback",
+            threadPoolKey = "getAllUsersByUsername")
+    public List<User> getAllUsersByUsername(String filter) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Credentials);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        User [] users = restTemplate.exchange("http://customer-info-service/usersByUsername/" + filter,
+                HttpMethod.GET, entity, User[].class).getBody();
+        return Arrays.asList(users);
+    }
+    @Transactional
+    public List<User> getAllUsersByUsernameFallback(String filter) {
+        ArrayList<User> users = new ArrayList<User>();
+        users.add(new User(-1L, "Not available", "Not available"));
+        return users;
+    }
+
+    @Transactional
+    @HystrixCommand(fallbackMethod = "getUserByUsernameFallback",
+            threadPoolKey = "getUserByUsername")
+    public User getUserByUsername(String username) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Credentials);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange("http://customer-info-service/userByUsername/" + username ,
+                HttpMethod.GET, entity, User.class).getBody();
+    }
+    @Transactional
+    public User getUserByUsernameFallback(String username) {
+        User user = new User(-1L, "Not available", "Not available");
+        return user;
+    }
+
+    @Transactional
+    @HystrixCommand(fallbackMethod = "getUserByUsernameFallback",
+            threadPoolKey = "getUserByUsername")
+    public String login(String username, String password) {
+        String apiCredentials = username+":"+password;
         String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic " + base64Credentials);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-
-//        return restTemplate.getForObject(
-//                "http://book-info-service/book/info/" + userId,
-//                UserBook.class);
-        return restTemplate.exchange("http://customer-info-service/user/" + id,
+        User user = restTemplate.exchange("http://customer-info-service/users",
                 HttpMethod.GET, entity, User.class).getBody();
-    }
-
-    @Transactional
-    public User getUserByIdFallback(Long id) {
-        User userBook = new User(-1L, "Not available", "Not available");
-        return userBook;
-    }
-    @Transactional
-    public List<User> getAllUsers() {
-        User [] users = restTemplate.getForObject("http://customer-info-service/users",
-                User[].class);
-        return Arrays.asList(users);
-    }
-
-    @Transactional
-    public List<User> allUsersByUsername(String filter) {
-        User [] users = restTemplate.getForObject("http://customer-info-service/users",
-                User[].class);
-        return Arrays.asList(users);
-    }
-
-    @Transactional
-    public User getUserByUsername(String username) {
-        return restTemplate.getForObject("http://customer-info-service/userByUsername/" + username, User.class);
+        if(user != null ){
+            return "All ok";
+        }
+        return "All not ok";
     }
 }
