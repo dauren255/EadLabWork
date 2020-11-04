@@ -3,6 +3,7 @@ package com.example.coursecatalog.service;
 import com.example.coursecatalog.models.User;
 import com.example.coursecatalog.service.interfaces.CustomerInfoServiceInt;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -25,7 +26,14 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
 
     @Transactional
     @HystrixCommand(fallbackMethod = "getUserByIdFallback",
-            threadPoolKey = "getUserById")
+            threadPoolKey = "getUserById",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "2"),
+//                    @HystrixProperty(name = "maximumSize", value = "2"),
+                    @HystrixProperty(name = "maxQueueSize", value = "1")
+//                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
+
+            })
     public User getUserById(Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic " + base64Credentials);
@@ -33,6 +41,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
         return restTemplate.exchange("http://customer-info-service/user/" + id,
                 HttpMethod.GET, entity, User.class).getBody();
     }
+
     @Transactional
     public User getUserByIdFallback(Long id) {
         User user = new User(-1L, "Not available", "Not available");
@@ -41,7 +50,14 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
 
     @Transactional
     @HystrixCommand(fallbackMethod = "getAllUsersFallback",
-            threadPoolKey = "getAllUsers")
+            threadPoolKey = "getAllUsers",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "2"),
+//                    @HystrixProperty(name = "maximumSize", value = "2"),
+                    @HystrixProperty(name = "maxQueueSize", value = "1")
+//                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
+
+            })
     public List<User> getAllUsers() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic " + base64Credentials);
@@ -51,6 +67,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
                 HttpMethod.GET, entity, User[].class).getBody();
         return Arrays.asList(users);
     }
+
     @Transactional
     public List<User> getAllUsersFallback() {
         ArrayList<User> users = new ArrayList<User>();
@@ -60,7 +77,14 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
 
     @Transactional
     @HystrixCommand(fallbackMethod = "getAllUsersByUsernameFallback",
-            threadPoolKey = "getAllUsersByUsername")
+            threadPoolKey = "getAllUsersByUsername",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "2"),
+//                    @HystrixProperty(name = "maximumSize", value = "2"),
+                    @HystrixProperty(name = "maxQueueSize", value = "1")
+//                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
+
+            })
     public List<User> getAllUsersByUsername(String filter) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic " + base64Credentials);
@@ -70,6 +94,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
                 HttpMethod.GET, entity, User[].class).getBody();
         return Arrays.asList(users);
     }
+
     @Transactional
     public List<User> getAllUsersByUsernameFallback(String filter) {
         ArrayList<User> users = new ArrayList<User>();
@@ -79,7 +104,14 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
 
     @Transactional
     @HystrixCommand(fallbackMethod = "getUserByUsernameFallback",
-            threadPoolKey = "getUserByUsername")
+            threadPoolKey = "getUserByUsername",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "2"),
+//                    @HystrixProperty(name = "maximumSize", value = "2"),
+                    @HystrixProperty(name = "maxQueueSize", value = "1")
+//                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
+
+            })
     public User getUserByUsername(String username) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Basic " + base64Credentials);
@@ -88,6 +120,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
         return restTemplate.exchange("http://customer-info-service/userByUsername/" + username ,
                 HttpMethod.GET, entity, User.class).getBody();
     }
+
     @Transactional
     public User getUserByUsernameFallback(String username) {
         User user = new User(-1L, "Not available", "Not available");
@@ -95,8 +128,6 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
     }
 
     @Transactional
-    @HystrixCommand(fallbackMethod = "getUserByUsernameFallback",
-            threadPoolKey = "getUserByUsername")
     public String login(String username, String password) {
         String apiCredentials = username+":"+password;
         String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));

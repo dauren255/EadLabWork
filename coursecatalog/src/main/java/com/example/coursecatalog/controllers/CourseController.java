@@ -24,7 +24,7 @@ public class CourseController {
     private CourseRatingService courseRatingService;
 
     @GetMapping("/home")
-    public String homePage(@RequestParam(required = false, defaultValue = "") String filter, Model model){
+    public String homePage(@RequestParam(required = false, defaultValue = "") String filter, Model model) throws InterruptedException {
         List<CourseCatalog> courseCatalogs = new ArrayList<>();
         List<Course> courses;
         if (filter != null && !filter.isEmpty()) {

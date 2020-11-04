@@ -1,9 +1,9 @@
 package com.example.coursecatalog.service;
 
-import com.example.coursecatalog.models.Course;
 import com.example.coursecatalog.models.Rating;
 import com.example.coursecatalog.service.interfaces.CourseRatingServiceInt;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,14 @@ public class CourseRatingService implements CourseRatingServiceInt {
 
     @Transactional
     @HystrixCommand(fallbackMethod = "courseRatingByCourseIdFallback",
-            threadPoolKey = "courseRatingByCourseId")
+            threadPoolKey = "courseRatingByCourseId",
+            threadPoolProperties = {
+                    @HystrixProperty(name = "coreSize", value = "2"),
+//                    @HystrixProperty(name = "maximumSize", value = "2"),
+                    @HystrixProperty(name = "maxQueueSize", value = "1")
+//                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
+
+            })
     public Rating courseRatingByCourseId(Long id){
         return restTemplate.getForObject(
                 "http://course-rating-service/rating/" + id, Rating.class);
