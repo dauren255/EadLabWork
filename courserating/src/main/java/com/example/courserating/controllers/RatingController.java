@@ -16,6 +16,7 @@ public class RatingController {
         ratings = ratingService.findAll();
         return ratings;
     }
+
     @GetMapping("/rating/{courseId}")
     public Rating getCourseById(@PathVariable Long courseId) {
         Rating rating;

@@ -63,7 +63,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
         headers.add("Authorization", "Basic " + base64Credentials);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        User [] users = restTemplate.exchange("http://customer-info-service/users",
+        User[] users = restTemplate.exchange("http://customer-info-service/users",
                 HttpMethod.GET, entity, User[].class).getBody();
         return Arrays.asList(users);
     }
@@ -90,7 +90,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
         headers.add("Authorization", "Basic " + base64Credentials);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        User [] users = restTemplate.exchange("http://customer-info-service/usersByUsername/" + filter,
+        User[] users = restTemplate.exchange("http://customer-info-service/usersByUsername/" + filter,
                 HttpMethod.GET, entity, User[].class).getBody();
         return Arrays.asList(users);
     }
@@ -117,7 +117,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
         headers.add("Authorization", "Basic " + base64Credentials);
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        return restTemplate.exchange("http://customer-info-service/userByUsername/" + username ,
+        return restTemplate.exchange("http://customer-info-service/userByUsername/" + username,
                 HttpMethod.GET, entity, User.class).getBody();
     }
 
@@ -129,7 +129,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
 
     @Transactional
     public String login(String username, String password) {
-        String apiCredentials = username+":"+password;
+        String apiCredentials = username + ":" + password;
         String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
 
         HttpHeaders headers = new HttpHeaders();
@@ -138,7 +138,7 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
 
         User user = restTemplate.exchange("http://customer-info-service/users",
                 HttpMethod.GET, entity, User.class).getBody();
-        if(user != null ){
+        if (user != null) {
             return "All ok";
         }
         return "All not ok";

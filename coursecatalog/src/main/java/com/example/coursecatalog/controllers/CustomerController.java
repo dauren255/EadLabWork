@@ -1,21 +1,16 @@
 package com.example.coursecatalog.controllers;
 
-import com.example.coursecatalog.models.Course;
-import com.example.coursecatalog.models.CourseCatalog;
-import com.example.coursecatalog.models.Rating;
 import com.example.coursecatalog.models.User;
 import com.example.coursecatalog.service.CustomerInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api")
 public class CustomerController {
     @Autowired
     CustomerInfoService customerInfoService;
@@ -43,8 +38,9 @@ public class CustomerController {
         model.addAttribute("text", "");
         return "login";
     }
+
     @PostMapping("/login")
-    public String loginPost(@RequestParam String username, @RequestParam String password , Model model) {
+    public String loginPost(@RequestParam String username, @RequestParam String password, Model model) {
 
         model.addAttribute("text", customerInfoService.login(username, password));
         return "login";

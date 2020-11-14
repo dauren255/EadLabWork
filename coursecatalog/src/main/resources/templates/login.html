@@ -7,11 +7,11 @@
 </head>
 <body>
 <script>
- var a = [(${text})]
+    var a = [(${text})]
     alert(a)
 </script>
 <header th:insert="blocks/header :: header"></header>
-<div >
+<div>
     <div style="margin: auto; width: 33%;">
         <form th:action="@{/login}" method="post">
             <input type="text" name="username" placeholder="Логин" class="form-control"><br>

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CourseRatingServiceInt {
     Rating courseRatingByCourseId(Long id);
+
     void addRating(Rating rating);
+
     Rating courseRatingByCourseIdFallback(Long id);
 }

@@ -31,7 +31,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    public void addRoles(Role role){
+    public void addRoles(Role role) {
         roles.add(role);
     }
 

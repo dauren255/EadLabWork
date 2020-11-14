@@ -30,7 +30,7 @@ public class CourseInfoService implements CourseInfoServiceInt {
 //                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
 
             })
-    public ResponseEntity<?> courseById(Long id){
+    public ResponseEntity<?> courseById(Long id) {
 //        Thread.sleep(5000);
         return ResponseEntity.ok(restTemplate.getForObject(
                 "http://course-info-service/course/" + id, Course.class));
@@ -56,7 +56,7 @@ public class CourseInfoService implements CourseInfoServiceInt {
 //                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
 
             })
-    public List<Course> allCourse(){
+    public List<Course> allCourse() {
 //        Thread.sleep(5000);
         Course[] courses = restTemplate.getForObject(
                 "http://course-info-service/courses", Course[].class);

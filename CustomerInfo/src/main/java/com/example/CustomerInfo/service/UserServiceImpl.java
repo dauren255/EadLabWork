@@ -23,23 +23,28 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public Iterable<User> findAll() {
         return userRepository.findAll();
     }
+
     @Transactional
     public Iterable<User> findAllByUsername(String username) {
         return userRepository.findAllByUsernameContainingIgnoreCase(username);
     }
+
     @Transactional
     public User findById(Long id) {
         return userRepository.findById(id).get();
     }
+
     @Transactional
     public User findByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
+
     @Transactional
     public void save(User user) {
         user.addRoles(Role.USER);
         userRepository.save(user);
     }
+
     @Transactional
     public void deleteById(Long id) {
         userRepository.delete(userRepository.findById(id).get());

@@ -6,21 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/course/request")
 public class CourseController {
     @Autowired
     private CourseServiceImpl courseServiceImpl;
+
     @GetMapping("/courses")
     public Iterable<Course> allCourses() {
         Iterable<Course> courses;
         courses = courseServiceImpl.findAll();
         return courses;
     }
+
     @GetMapping("/courses/{title}")
     public Iterable<Course> allCoursesByTitle(@PathVariable String title) {
         Iterable<Course> courses;
         courses = courseServiceImpl.findAllByTitleContainingIgnoreCase(title);
         return courses;
     }
+
     @GetMapping("/course/{id}")
     public Course getCourseById(@PathVariable Long id) {
         Course course;

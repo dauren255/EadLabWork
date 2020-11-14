@@ -24,7 +24,7 @@ public class CourseRatingService implements CourseRatingServiceInt {
 //                    @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "true")
 
             })
-    public Rating courseRatingByCourseId(Long id){
+    public Rating courseRatingByCourseId(Long id) {
         return restTemplate.getForObject(
                 "http://course-rating-service/rating/" + id, Rating.class);
     }
