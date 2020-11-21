@@ -1,9 +1,5 @@
 package com.example.authservice.security;
 
-
-import javax.servlet.http.HttpServletResponse;
-
-import com.eureka.common.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -14,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.servlet.http.HttpServletResponse;
 
 @EnableWebSecurity 	// Enable security config. This annotation denotes config for spring security.
 public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {

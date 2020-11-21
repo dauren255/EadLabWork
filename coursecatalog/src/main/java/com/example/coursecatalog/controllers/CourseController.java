@@ -6,10 +6,12 @@ import com.example.coursecatalog.models.Rating;
 import com.example.coursecatalog.service.CourseInfoService;
 import com.example.coursecatalog.service.CourseRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -58,7 +60,6 @@ public class CourseController {
         course.setTitle(courseCatalog.getTitle());
         course.setAuthor(courseCatalog.getAuthor());
         courseInfoService.addCourse(course);
-        Thread.sleep(1000);
         Rating rating = new Rating();
         rating.setCourseId(3L);
         rating.setRating(courseCatalog.getRating());

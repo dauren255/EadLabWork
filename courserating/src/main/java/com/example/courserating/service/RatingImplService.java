@@ -3,7 +3,6 @@ package com.example.courserating.service;
 import com.example.courserating.models.Rating;
 import com.example.courserating.repo.RatingRepository;
 import com.example.courserating.service.interfaces.RatingService;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

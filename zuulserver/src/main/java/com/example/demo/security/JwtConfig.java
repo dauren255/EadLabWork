@@ -1,9 +1,8 @@
-package com.example.commonservice.security;
-
-import org.springframework.beans.factory.annotation.Value;
+package com.example.demo.security;
 
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @ToString
