@@ -33,7 +33,7 @@ public class CourseInfoService implements CourseInfoServiceInt {
     public ResponseEntity<?> courseById(Long id) {
 //        Thread.sleep(5000);
         return ResponseEntity.ok(restTemplate.getForObject(
-                "http://course-info-service/course/" + id, Course.class));
+                "http://course-info-service/course/request/course/" + id, Course.class));
     }
 
     @Transactional
@@ -43,7 +43,7 @@ public class CourseInfoService implements CourseInfoServiceInt {
 
     @Transactional
     public void addCourse(Course course) {
-        restTemplate.postForObject("http://course-info-service/addCourse", course, Course.class);
+        restTemplate.postForObject("http://course-info-service/course/request/addCourse", course, Course.class);
     }
 
     @Transactional
@@ -59,7 +59,7 @@ public class CourseInfoService implements CourseInfoServiceInt {
     public List<Course> allCourse() {
 //        Thread.sleep(5000);
         Course[] courses = restTemplate.getForObject(
-                "http://course-info-service/courses", Course[].class);
+                "http://course-info-service/course/request/courses", Course[].class);
         return Arrays.asList(courses);
     }
 
@@ -83,7 +83,7 @@ public class CourseInfoService implements CourseInfoServiceInt {
             })
     public List<Course> allCourseByTitle(String title) {
         Course[] courses = restTemplate.getForObject(
-                "http://course-info-service/courses/" + title, Course[].class);
+                "http://course-info-service/course/request/courses/" + title, Course[].class);
         return Arrays.asList(courses);
     }
 
