@@ -6,16 +6,42 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="common-service" />
+        <module name="springdiscovery" />
+        <module name="courseinfo" />
+        <module name="CustomerInfo" />
+        <module name="notifyservice" />
+        <module name="zull-server" />
+        <module name="courserating" />
+        <module name="courserequest" />
+        <module name="auth-service" />
+        <module name="coursecatalog" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="auth-service" target="11" />
       <module name="common-service" target="11" />
+      <module name="coursecatalog" target="11" />
+      <module name="courseinfo" target="11" />
+      <module name="courserating" target="11" />
+      <module name="courserequest" target="11" />
+      <module name="CustomerInfo" target="11" />
+      <module name="notifyservice" target="11" />
+      <module name="springdiscovery" target="11" />
+      <module name="zull-server" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CustomerInfo" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
       <module name="common-service" options="-parameters" />
+      <module name="coursecatalog" options="-parameters" />
+      <module name="courseinfo" options="-parameters" />
+      <module name="courserating" options="-parameters" />
+      <module name="courserequest" options="-parameters" />
+      <module name="notifyservice" options="-parameters" />
+      <module name="springdiscovery" options="-parameters" />
+      <module name="zull-server" options="-parameters" />
     </option>
   </component>
 </project>

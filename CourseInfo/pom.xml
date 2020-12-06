@@ -84,6 +84,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>course-info-service</finalName>
     </build>
 
 </project>

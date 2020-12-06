@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/common-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CourseInfo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CourseInfo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CustomerInfo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CustomerInfo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/coursecatalog/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/coursecatalog/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/courserating/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/courserating/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/courserequest/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/courserequest/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notifyservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notifyservice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springdiscovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springdiscovery/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zuulserver/src/main/java" charset="UTF-8" />
   </component>
 </project>

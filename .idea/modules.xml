@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/common-service/common-service.iml" filepath="$PROJECT_DIR$/common-service/common-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CustomerInfo/CustomerInfo.iml" filepath="$PROJECT_DIR$/CustomerInfo/CustomerInfo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/authservice/auth-service.iml" filepath="$PROJECT_DIR$/authservice/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/coursecatalog/coursecatalog.iml" filepath="$PROJECT_DIR$/coursecatalog/coursecatalog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CourseInfo/courseinfo.iml" filepath="$PROJECT_DIR$/CourseInfo/courseinfo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/courserating/courserating.iml" filepath="$PROJECT_DIR$/courserating/courserating.iml" />
+      <module fileurl="file://$PROJECT_DIR$/courserequest/courserequest.iml" filepath="$PROJECT_DIR$/courserequest/courserequest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notifyservice/notifyservice.iml" filepath="$PROJECT_DIR$/notifyservice/notifyservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springdiscovery/springdiscovery.iml" filepath="$PROJECT_DIR$/springdiscovery/springdiscovery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zuulserver/zull-server.iml" filepath="$PROJECT_DIR$/zuulserver/zull-server.iml" />
     </modules>
   </component>
 </project>

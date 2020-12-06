@@ -4,10 +4,19 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/common-service/pom.xml" />
+        <option value="$PROJECT_DIR$/authservice/pom.xml" />
+        <option value="$PROJECT_DIR$/coursecatalog/pom.xml" />
+        <option value="$PROJECT_DIR$/CourseInfo/pom.xml" />
+        <option value="$PROJECT_DIR$/courserating/pom.xml" />
+        <option value="$PROJECT_DIR$/courserequest/pom.xml" />
+        <option value="$PROJECT_DIR$/CustomerInfo/pom.xml" />
+        <option value="$PROJECT_DIR$/notifyservice/pom.xml" />
+        <option value="$PROJECT_DIR$/springdiscovery/pom.xml" />
+        <option value="$PROJECT_DIR$/zuulserver/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" project-jdk-name="13.0.2" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" default="false" project-jdk-name="13.0.2" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
