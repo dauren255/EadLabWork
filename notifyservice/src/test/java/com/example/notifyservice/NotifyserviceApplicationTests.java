@@ -1,13 +1,16 @@
 package com.example.notifyservice;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NotifyserviceApplicationTests {
+public class NotifyserviceApplicationTests {
 
+	public NotifyserviceApplicationTests(){
+
+	}
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 	}
 
 }

@@ -1,13 +1,16 @@
 package com.example.courserating;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CourseRatingApplicationTests {
+public class CourseRatingApplicationTests {
 
+    public CourseRatingApplicationTests(){
+        
+    }
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
 
 }

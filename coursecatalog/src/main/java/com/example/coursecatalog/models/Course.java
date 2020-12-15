@@ -12,8 +12,4 @@ public class Course {
     private String title;
     private String author;
 
-    public Course(String title, String author) {
-        this.title = title;
-        this.author = author;
-    }
 }

@@ -10,7 +10,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
     String apiCredentials = "rest-client:p@ssword";
     String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
 
-    @Transactional
     @HystrixCommand(fallbackMethod = "getUserByIdFallback",
             threadPoolKey = "getUserById",
             threadPoolProperties = {
@@ -42,13 +40,11 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
                 HttpMethod.GET, entity, User.class).getBody();
     }
 
-    @Transactional
     public User getUserByIdFallback(Long id) {
         User user = new User(-1L, "Not available", "Not available");
         return user;
     }
 
-    @Transactional
     @HystrixCommand(fallbackMethod = "getAllUsersFallback",
             threadPoolKey = "getAllUsers",
             threadPoolProperties = {
@@ -68,14 +64,12 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
         return Arrays.asList(users);
     }
 
-    @Transactional
     public List<User> getAllUsersFallback() {
         ArrayList<User> users = new ArrayList<User>();
         users.add(new User(-1L, "Not available", "Not available"));
         return users;
     }
 
-    @Transactional
     @HystrixCommand(fallbackMethod = "getAllUsersByUsernameFallback",
             threadPoolKey = "getAllUsersByUsername",
             threadPoolProperties = {
@@ -95,14 +89,12 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
         return Arrays.asList(users);
     }
 
-    @Transactional
     public List<User> getAllUsersByUsernameFallback(String filter) {
         ArrayList<User> users = new ArrayList<User>();
         users.add(new User(-1L, "Not available", "Not available"));
         return users;
     }
 
-    @Transactional
     @HystrixCommand(fallbackMethod = "getUserByUsernameFallback",
             threadPoolKey = "getUserByUsername",
             threadPoolProperties = {
@@ -121,13 +113,11 @@ public class CustomerInfoService implements CustomerInfoServiceInt {
                 HttpMethod.GET, entity, User.class).getBody();
     }
 
-    @Transactional
     public User getUserByUsernameFallback(String username) {
         User user = new User(-1L, "Not available", "Not available");
         return user;
     }
 
-    @Transactional
     public String login(String username, String password) {
         String apiCredentials = username + ":" + password;
         String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));

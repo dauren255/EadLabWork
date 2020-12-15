@@ -7,7 +7,6 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class CourseInfoService implements CourseInfoServiceInt {
     @Autowired
     RestTemplate restTemplate;
 
-    @Transactional
     @HystrixCommand(fallbackMethod = "courseByIdFallback",
             threadPoolKey = "courseById",
             threadPoolProperties = {
@@ -36,17 +34,14 @@ public class CourseInfoService implements CourseInfoServiceInt {
                 "http://course-info-service/course/request/course/" + id, Course.class));
     }
 
-    @Transactional
     public Course courseByIdFallback(Long id) {
         return new Course(-1L, "Not available", "Not available");
     }
 
-    @Transactional
     public void addCourse(Course course) {
         restTemplate.postForObject("http://course-info-service/course/request/addCourse", course, Course.class);
     }
 
-    @Transactional
     @HystrixCommand(fallbackMethod = "allCourseFallback",
             threadPoolKey = "allCourse",
             threadPoolProperties = {
@@ -59,11 +54,10 @@ public class CourseInfoService implements CourseInfoServiceInt {
     public List<Course> allCourse() {
 //        Thread.sleep(5000);
         Course[] courses = restTemplate.getForObject(
-                "http://course-info-service/course/request/courses", Course[].class);
+                "http://5fe76d54a9a6:8083/actuator/info/course/request/courses", Course[].class);
         return Arrays.asList(courses);
     }
 
-    @Transactional
     public List<Course> allCourseFallback() {
         Course course = new Course();
         List<Course> list = new ArrayList<>();
@@ -71,7 +65,6 @@ public class CourseInfoService implements CourseInfoServiceInt {
         return list;
     }
 
-    @Transactional
     @HystrixCommand(fallbackMethod = "allCourseByTitleFallback",
             threadPoolKey = "allCourseByTitle",
             threadPoolProperties = {
@@ -87,7 +80,6 @@ public class CourseInfoService implements CourseInfoServiceInt {
         return Arrays.asList(courses);
     }
 
-    @Transactional
     public List<Course> allCourseByTitleFallback(String title) {
         Course course = new Course();
         List<Course> list = new ArrayList<>();

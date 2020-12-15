@@ -18,5 +18,6 @@
     <file url="file://$PROJECT_DIR$/springdiscovery/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/springdiscovery/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zuulserver/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zuulserver/src/main/resources" charset="UTF-8" />
   </component>
 </project>

@@ -1,13 +1,16 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ZuulServerApplicationTests {
+public class ZuulServerApplicationTests {
 
+    public ZuulServerApplicationTests(){
+
+    }
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
 
 }

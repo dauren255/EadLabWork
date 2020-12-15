@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringDiscoveryApplicationTests {
+public class SpringDiscoveryApplicationTests {
 
+    public SpringDiscoveryApplicationTests(){
+
+    }
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
 
 }

@@ -1,13 +1,16 @@
 package com.example.authservice;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuthServiceApplicationTests {
+public class AuthServiceApplicationTests {
 
+    public AuthServiceApplicationTests(){
+
+    }
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
 
 }

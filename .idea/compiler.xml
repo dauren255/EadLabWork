@@ -10,24 +10,24 @@
         <module name="courseinfo" />
         <module name="CustomerInfo" />
         <module name="notifyservice" />
-        <module name="zull-server" />
         <module name="courserating" />
-        <module name="courserequest" />
+        <module name="zull-server" />
         <module name="auth-service" />
+        <module name="courserequest" />
         <module name="coursecatalog" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="auth-service" target="11" />
+      <module name="auth-service" target="1.8" />
       <module name="common-service" target="11" />
-      <module name="coursecatalog" target="11" />
-      <module name="courseinfo" target="11" />
-      <module name="courserating" target="11" />
+      <module name="coursecatalog" target="1.8" />
+      <module name="courseinfo" target="1.8" />
+      <module name="courserating" target="1.8" />
       <module name="courserequest" target="11" />
-      <module name="CustomerInfo" target="11" />
-      <module name="notifyservice" target="11" />
+      <module name="CustomerInfo" target="1.8" />
+      <module name="notifyservice" target="1.8" />
       <module name="springdiscovery" target="11" />
-      <module name="zull-server" target="11" />
+      <module name="zull-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

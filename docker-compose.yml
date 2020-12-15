@@ -1,0 +1,149 @@
+version: "3.7"
+services:
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 6080:8080
+
+  springdiscovery:
+    image: springdiscovery
+    container_name: springdiscovery
+    build:
+      context: ./springdiscovery
+    ports:
+      - "8761:8761"
+    environment:
+      eureka.instance.hostname: springdiscovery
+      eureka.client.serviceUrl.defaultZone: http://springdiscovery:8761/eureka/
+
+  postgres:
+    image: postgres:11
+    restart: unless-stopped
+    ports:
+      - "5433:5433"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=2103
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=localhost
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  course-catalog-service:
+    image: course-catalog-service
+    container_name: course-catalog-service
+    build:
+      context: ./coursecatalog
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://springdiscovery:8761/eureka/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - springdiscovery
+      - course-info-service
+    links:
+      - springdiscovery:springdiscovery
+
+  course-info-service:
+    image: course-info-service
+    container_name: course-info-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 2103
+      eureka.client.serviceUrl.defaultZone: http://springdiscovery:8761/eureka/
+    build:
+      context: ./courseinfo
+    ports:
+      - "8083:8083"
+    depends_on:
+      - springdiscovery
+      - postgres
+    links:
+      - springdiscovery:springdiscovery
+      - postgres:postgres
+
+#  course-rating-service:
+#    image: course-rating-service
+#    container_name: course-rating-service
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+#    build:
+#      context: ./courserating
+#    ports:
+#      - "8082:8082"
+#    depends_on:
+#      - springdiscovery
+#      - postgres
+#    links:
+#      - springdiscovery:springdiscovery
+#      - postgres:postgres
+
+#  auth-service:
+#    image: auth-service
+#    container_name: auth-service
+#    build:
+#      context: ./authservice
+#    ports:
+#      - "9100:9100"
+#    depends_on:
+#      - springdiscovery
+#    links:
+#      - springdiscovery:springdiscovery
+
+#  course-request:
+#    image: course-request
+#    container_name: course-request
+#    build:
+#      context: ./courserequest
+#    ports:
+#      - "8084:8084"
+#    depends_on:
+#      - springdiscovery
+#    links:
+#      - springdiscovery:springdiscovery
+
+#  customer-info:
+#    image: customerinfo
+#    container_name: customerinfo
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+#    build:
+#      context: ./customerinfo
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - springdiscovery
+#    links:
+#      - springdiscovery:springdiscovery
+
+#  notify-service:
+#    image: notify-service
+#    container_name: notify-service
+#    build:
+#      context: ./notifyservice
+#    ports:
+#      - "9002:9002"
+#    depends_on:
+#      - springdiscovery
+#    links:
+#      - springdiscovery:springdiscovery
+
+#  zuulserver:
+#    image: zuulserver
+#    container_name: zuulserver
+#    build:
+#      context: ./zuulserver
+#    ports:
+#      - "8762:8762"
+#    depends_on:
+#      - springdiscovery
+#    links:
+#      - springdiscovery:springdiscovery
+#    environment:
+#      eureka.client.serviceUrl.defaultZone: http://springdiscovery:8761/eureka/
+
+volumes:
+  database:
